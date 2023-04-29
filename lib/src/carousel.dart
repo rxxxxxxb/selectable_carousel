@@ -200,11 +200,13 @@ class _SelectableCarousalState extends State<SelectableCarousal> {
           ),
           width: _controlWidth,
           child: TextButton(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            textColor: color,
-            child: child,
+            style: ButtonStyle(
+              overlayColor:
+                  MaterialStateProperty.all<Color>(Colors.transparent),
+              foregroundColor: MaterialStateProperty.all<Color>(color),
+            ),
             onPressed: onPressed,
+            child: child,
           ),
         ),
       ],
@@ -215,33 +217,32 @@ class _SelectableCarousalState extends State<SelectableCarousal> {
     return items
         .map(
           (card) => SelectableCard(
-                controller:
-                    widget.controller ?? new SelectableCarousalController(),
-                onChanged: (val) {
-                  widget.onChanged(val);
-                  setState(() {
-                    _selectedCardId = val;
-                  });
-                },
-                id: card['id'],
-                selectedId: _selectedCardId,
-                borderColor: widget.borderColor,
-                title: (card['title'] != null)
-                    ? Text(
-                        card['title'],
-                        style: TextStyle(
-                          fontSize: _fontSize,
-                          color: widget.color,
-                          fontFamily: widget.fontFamily ??
-                              Theme.of(context).textTheme.body1.fontFamily,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                    : null,
-                body: card['body'],
-                width: _cardWidth,
-                displaySelectionBorder: 'body',
-              ),
+            controller: widget.controller ?? new SelectableCarousalController(),
+            onChanged: (val) {
+              widget.onChanged(val);
+              setState(() {
+                _selectedCardId = val;
+              });
+            },
+            id: card['id'],
+            selectedId: _selectedCardId,
+            borderColor: widget.borderColor,
+            title: (card['title'] != null)
+                ? Text(
+                    card['title'],
+                    style: TextStyle(
+                      fontSize: _fontSize,
+                      color: widget.color,
+                      fontFamily: widget.fontFamily ??
+                          Theme.of(context).textTheme.bodyMedium.fontFamily,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                : null,
+            body: card['body'],
+            width: _cardWidth,
+            displaySelectionBorder: 'body',
+          ),
         )
         .toList();
   }
