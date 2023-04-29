@@ -199,7 +199,7 @@ class _SelectableCarousalState extends State<SelectableCarousal> {
             bottom: (0.16 * _cardHeight),
           ),
           width: _controlWidth,
-          child: FlatButton(
+          child: TextButton(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             textColor: color,
